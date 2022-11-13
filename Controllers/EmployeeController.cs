@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Microsoft.VisualBasic;
 using Newtonsoft.Json;
 using SenwesAssignment_API.ApiErrors;
 using SenwesAssignment_API.Data;
@@ -15,7 +16,8 @@ using System.Xml.Linq;
 namespace SenwesAssignment_API.Controllers
 {
     [Produces("application/json")]
-    [ApiController, Authorize]  
+    [ApiController]
+    [Authorize]
     [Route("[controller]")]
     public class EmployeeController : ControllerBase
     {
@@ -58,15 +60,13 @@ namespace SenwesAssignment_API.Controllers
         }
 
        
-        [HttpGet("DateOfJoining")]
+        [HttpGet("SeniorEmployee")]
         public async Task<ActionResult<List<Employee>>> GetEmployeeByDate()
         {
             var years = 365 * 5;
 
             var cutoff = DateTime.Now.Subtract(new TimeSpan(years, 0, 0, 0));
 
-
-            //var employeeSalary = _loadData.LoadEmployeeData().Where(x => x.DateOfJoining.Contains(date) && ).ToList();  a=>a.DateCreated<cutoff
             var employee = _loadData.LoadEmployeeData().Where(x => Convert.ToDateTime(x.DateOfJoining) < cutoff).ToList(); 
 
             if (employee == null)
@@ -93,7 +93,7 @@ namespace SenwesAssignment_API.Controllers
         [HttpGet("TopPaid")]
         public async Task<ActionResult<List<Employee>>> GetEmployeeBySalary()
         {
-            var employee = _loadData.LoadEmployeeData().OrderByDescending(e => e.Salary).Take(10).ToList();
+            var employee = _loadData.LoadEmployeeData().Where(x => x.Gender == "M").OrderByDescending(e => e.Salary).Take(10).ToList();
 
             if (employee == null)
             {
@@ -140,8 +140,8 @@ namespace SenwesAssignment_API.Controllers
         }
 
 
-        
-        [HttpGet("CityName"), AllowAnonymous]
+        [AllowAnonymous]
+        [HttpGet("CityName")]
         public dynamic GetEmployeeByCityName()
         {
             var employee = _loadData.LoadEmployeeData().Select(i => new { i.City }).ToList();
