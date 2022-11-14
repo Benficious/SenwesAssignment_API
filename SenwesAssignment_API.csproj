@@ -10,6 +10,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Authenticatin\**" />
+    <Content Remove="Authenticatin\**" />
+    <EmbeddedResource Remove="Authenticatin\**" />
+    <None Remove="Authenticatin\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.6" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
@@ -17,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Authenticatin\" />
     <Folder Include="Service\" />
   </ItemGroup>
 

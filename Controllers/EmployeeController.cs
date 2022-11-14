@@ -41,7 +41,10 @@ namespace SenwesAssignment_API.Controllers
             return Ok(employeeData);
         }
 
-        
+        /// <summary>
+        /// Get employees by id
+        /// </summary>4
+        /// <returns>Returns a list of  all employees by Id</returns>
         [Route("Get/{empId}")]
         [HttpGet]
         public IActionResult GetByEmployeeId(int empId)
@@ -59,7 +62,10 @@ namespace SenwesAssignment_API.Controllers
 
         }
 
-       
+        /// <summary>
+        /// Get list of  all employees that joined the company in the last 5 years
+        /// </summary>
+        /// <returns>Returns a list of  all employees that joined the company in the last 5 years</returns>
         [HttpGet("SeniorEmployee")]
         public async Task<ActionResult<List<Employee>>> GetEmployeeByDate()
         {
@@ -77,6 +83,10 @@ namespace SenwesAssignment_API.Controllers
         }
 
 
+        /// <summary>
+        /// Get list of all employees older than 30
+        /// </summary>4
+        /// <returns>Returns a list of all employees older than 30</returns>
         [HttpGet("Age")]
         public async Task<ActionResult<List<Employee>>> GetEmployeeByAge(float age = 30)
         {
@@ -90,6 +100,11 @@ namespace SenwesAssignment_API.Controllers
         }
 
 
+        /// <summary>
+        /// Get list of top 10 highest paid males
+        /// </summary>4
+        /// <returns>Returns a list of top 10 highest paid males</returns>
+        /// 
         [HttpGet("TopPaid")]
         public async Task<ActionResult<List<Employee>>> GetEmployeeBySalary()
         {
@@ -102,6 +117,10 @@ namespace SenwesAssignment_API.Controllers
             return employee;
         }
 
+        /// <summary>
+        /// Get list return anyone with the specific name or surname and city
+        /// </summary>4
+        /// <returns>Returns a list return anyone with the specific name or surname and city</returns>
         [HttpGet("City")]
         public dynamic GetEmployeeByCityName(string name)
         {
@@ -120,8 +139,12 @@ namespace SenwesAssignment_API.Controllers
         }
 
 
-       
-        [HttpGet("SalaryEm")]
+        /// <summary>
+        /// Get all employees's  with a first name of “Treasure” and then return their salary
+        /// </summary>4
+        /// <returns>Returns a list with a first name of “Treasure” and then return their salary</returns>
+
+        [HttpGet("Salary")]
         public dynamic GetEmployeeNameSalary2(string firstName = "Treasure")
         {
             var employeeSalary = _loadData.LoadEmployeeData().Where(x => x.FirstName == firstName).Select(i => new { i.Salary }).ToList();
@@ -139,6 +162,10 @@ namespace SenwesAssignment_API.Controllers
 
         }
 
+        /// <summary>
+        /// Get all employees's city names to unauthenticated users
+        /// </summary>
+        /// <returns>Returns a list of  City names to unauthenticated users</returns>
 
         [AllowAnonymous]
         [HttpGet("CityName")]

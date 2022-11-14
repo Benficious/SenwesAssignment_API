@@ -26,6 +26,12 @@ namespace SenwesAssignment_API.Controllers
             // _context = context;
         }
 
+
+        /// <summary>
+        /// Get User Token
+        /// </summary>4
+        /// <returns>Returns a list token based on user data that exist on user repository use  Ben@gmail.com and Ben123</returns>
+        /// 
         [HttpPost]
         public IActionResult Post(UserModel userInfo)
         

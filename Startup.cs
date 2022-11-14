@@ -63,6 +63,9 @@ namespace SenwesAssignment_API
                         new string[]{ }
                     }
                 });
+                var xmlFile = "API.XML";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
